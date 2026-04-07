@@ -32,11 +32,11 @@ footer{text-align:center;padding:30px;background:#0a2540;color:white;margin-top:
 <body>
 
 <header>
-<div><strong>OBX</strong></div>
+<div><strong>PAP.LA</strong></div>
 <nav>
 <a href="#home">Home</a>
 <a href="#about">About</a>
-<a href="#product">Product</a>
+<a href="#product">Products</a>
 <a href="#sports">Sports</a>
 <a href="#contact">Contact</a>
 
@@ -150,13 +150,59 @@ The Practice Box is a portable training frame built to help athletes structure d
 
 <section class="section" id="contact">
   <h2 style="font-family: 'quicksand'; font-size: 40px">Contact OBX</h2>
-  <form class="contact-form" action="https://formspree.io/f/xvzvleoq" method="POST">
+  <form class="contact-form" action="https://formspree.io/f/xgopdgrw" method="POST" target="_blank"> 
     <input type="text" name="name" placeholder="Your Name" required>
     <input type="email" name="email" placeholder="Your Email" required>
     <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
     <button class="button" type="submit">Send Message</button>
   </form>
 </section>
+
+
+<section class="section" id="contact">
+  <h2>Contact OBX</h2>
+
+  <form class="contact-form" id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+    <button class="button" type="submit">Send Message</button>
+  </form>
+
+  <p id="form-status" style="text-align:center; margin-top:15px;"></p>
+</section>
+
+<script>
+  const form = document.getElementById("contact-form");
+  const status = document.getElementById("form-status");
+
+  form.addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const data = new FormData(form);
+
+    try {
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: data,
+        headers: {
+          Accept: "application/json"
+        }
+      });
+
+      if (response.ok) {
+        status.textContent = "Thanks! Your message was sent successfully.";
+        form.reset();
+      } else {
+        status.textContent = "Oops! Something went wrong. Please try again.";
+      }
+    } catch (error) {
+      status.textContent = "Oops! There was a problem submitting your form.";
+    }
+  });
+</script>
+
+
 
 <footer>
 <p>© 2026 OBX — The Practice Box</p>
